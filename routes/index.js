@@ -11,7 +11,7 @@ router.get("/", function (req, res) {
 router.get("/shop", isLoggedIn, async function (req, res) {
     let success = req.flash("success");
     let products = await productModel.find();
-    res.render("shop", { products, success });
+    res.render("shop", { products, loggedin: true, success });
 });
 
 router.get("/cart", isLoggedIn, async function (req, res) {
@@ -32,7 +32,8 @@ router.get("/cart", isLoggedIn, async function (req, res) {
         }
     });
     res.render("cart", {
-        groupedCart: Object.values(groupedCart)
+        groupedCart: Object.values(groupedCart),
+        loggedin: true
     });
 
 });
